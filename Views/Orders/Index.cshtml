@@ -1,0 +1,40 @@
+﻿@model IEnumerable<gestionaleMedeXpress.Models.Order>
+
+@{
+    ViewData["Title"] = "Orders List";
+}
+
+<h1>Ordini</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Utente</th>
+            <th>Prodotti</th>
+            <th>Totale</th>
+            <th>Data</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.Utente</td>
+                <td>
+                    <ul>
+                        @foreach (var prodotto in order.Prodotti)
+                        {
+                            <li>
+                                <strong>Nome:</strong> @prodotto.Nome<br />
+                                <strong>Prezzo:</strong> €@prodotto.Prezzo<br />
+                                <strong>Quantità:</strong> @prodotto.Quantita
+                            </li>
+                        }
+                    </ul>
+                </td>
+                <td>€@order.Totale</td>
+                <td>@order.Data.ToLocalTime().ToString("dd/MM/yyyy HH:mm:ss")</td>
+            </tr>
+        }
+    </tbody>
+</table>
